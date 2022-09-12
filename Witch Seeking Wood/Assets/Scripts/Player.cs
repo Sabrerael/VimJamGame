@@ -1,9 +1,11 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour {
     [SerializeField] TextMeshProUGUI woodUI = null;
     [SerializeField] GameObject thrownWoodPrefab = null;
+    [SerializeField] float throwingSpeed = 5;
 
     private int woodCollected = 0;
 
@@ -26,7 +28,12 @@ public class Player : MonoBehaviour {
             return;
         }
 
-        Instantiate(thrownWoodPrefab);
+        GameObject thrownWood = Instantiate(thrownWoodPrefab, transform.position, Quaternion.identity);
+        Vector3 mousePosition = Mouse.current.position.ReadValue();
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        Vector3 normalizedMouseVector = (worldPosition - transform.position).normalized;
+
+        thrownWood.GetComponent<Rigidbody2D>().velocity = normalizedMouseVector * throwingSpeed;
 
         woodCollected--;
         woodUI.text = woodCollected.ToString();
