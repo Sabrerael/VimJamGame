@@ -17,9 +17,17 @@ public class Player : MonoBehaviour {
     }
 
     public int GetWoodCollected() { return woodCollected; }
+
     public void AddWoodCollected(int value) { 
         woodCollected += value; 
         woodUI.text = woodCollected.ToString();
+    }
+
+    public void RemoveWoodCollected() {
+        if (woodCollected > 0) {
+            woodCollected--;
+            woodUI.text = woodCollected.ToString();
+        }
     }
 
     public void ThrowWood() {
