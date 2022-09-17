@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Ghost : MonoBehaviour {
     [SerializeField] GameObject player = null;
+    [SerializeField] Transform[] teleportPoints = null;
     [SerializeField] float baseMovementSpeed = 1;
     [SerializeField] float movementSpeedIncrease = 0.25f;
     [SerializeField] float increaseStep = 10;
@@ -37,6 +38,13 @@ public class Ghost : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D other) {
         // Fade to invisible, Teleport away from player, fade back in, start moving.
+        if (other.gameObject.tag == "Player") {
+            Player player = other.gameObject.GetComponent<Player>();
+            player.RemoveWoodCollected();
+            player.RemoveWoodCollected();
+            // Animator calls;
+            TeleportAway();
+        }
     }
 
     public void StunGhost(float stunTime) {
@@ -45,6 +53,11 @@ public class Ghost : MonoBehaviour {
         StartCoroutine(StunTimer(stunTime));
         timer = 0;
         movementSpeed = baseMovementSpeed;
+    }
+
+    private void TeleportAway() {
+        int randomIndex = Random.Range(0,teleportPoints.Length);
+        transform.position = teleportPoints[randomIndex].position;
     }
 
     private IEnumerator StunTimer(float stunTime) {

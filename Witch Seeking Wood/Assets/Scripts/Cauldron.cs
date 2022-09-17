@@ -10,7 +10,7 @@ public class Cauldron : MonoBehaviour {
 
     private void Update() {
         if (woodAtCauldron >= winningWoodAmount) {
-            Debug.Log(woodAtCauldron + ", Win");
+            LevelLoader.Instance.LoadWinScreen();
         }
     }
 
@@ -29,7 +29,7 @@ public class Cauldron : MonoBehaviour {
 
     private void CheckLoseCondition() {
         if (totalWoodInLevel - wastedWood < winningWoodAmount) {
-            Debug.Log("Lose");
+            LevelLoader.Instance.LoadLoseScreen();
         }
     }
 }

@@ -37,10 +37,11 @@ public class Player : MonoBehaviour {
             return;
         }
 
-        GameObject thrownWood = Instantiate(thrownWoodPrefab, transform.position, Quaternion.identity);
         Vector3 mousePosition = Mouse.current.position.ReadValue();
         Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
         Vector3 normalizedMouseVector = (worldPosition - transform.position).normalized;
+        float angle = Mathf.Atan2(normalizedMouseVector.y, normalizedMouseVector.x)*Mathf.Rad2Deg;
+        GameObject thrownWood = Instantiate(thrownWoodPrefab, transform.position, Quaternion.Euler(0, 0, angle));
 
         thrownWood.GetComponent<Rigidbody2D>().velocity = normalizedMouseVector * throwingSpeed;
 

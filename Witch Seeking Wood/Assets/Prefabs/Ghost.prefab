@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  baseMovementSpeed: 3
+  teleportPoints: []
+  baseMovementSpeed: 4
   movementSpeedIncrease: 1
-  increaseStep: 10
+  increaseStep: 6
