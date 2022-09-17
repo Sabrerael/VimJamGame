@@ -3,17 +3,30 @@ using UnityEngine;
 
 public class Ghost : MonoBehaviour {
     [SerializeField] GameObject player = null;
-    [SerializeField] float movementSpeed = 1;
+    [SerializeField] float baseMovementSpeed = 1;
+    [SerializeField] float movementSpeedIncrease = 0.25f;
+    [SerializeField] float increaseStep = 10;
 
     private bool stunned = false;
+    private float movementSpeed;
+    private float timer;
     private Rigidbody2D myRigidbody2D;
 
     private void Start() {
         myRigidbody2D = GetComponent<Rigidbody2D>();
+        movementSpeed = baseMovementSpeed;
+        timer = 0;
     }
 
     private void Update() {
         if (stunned) { return; }
+
+        timer += Time.deltaTime;
+
+        if (timer >= increaseStep) {
+            movementSpeed += movementSpeedIncrease;
+            timer = 0;
+        }
 
         Vector3 playerPosition = player.transform.position;
 
@@ -30,6 +43,8 @@ public class Ghost : MonoBehaviour {
         stunned = true;
         myRigidbody2D.velocity = new Vector3(0,0,0);
         StartCoroutine(StunTimer(stunTime));
+        timer = 0;
+        movementSpeed = baseMovementSpeed;
     }
 
     private IEnumerator StunTimer(float stunTime) {

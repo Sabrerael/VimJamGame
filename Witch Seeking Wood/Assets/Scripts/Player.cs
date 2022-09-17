@@ -23,15 +23,16 @@ public class Player : MonoBehaviour {
         woodUI.text = woodCollected.ToString();
     }
 
-    public void RemoveWoodCollected() {
+    public bool RemoveWoodCollected() {
         if (woodCollected > 0) {
             woodCollected--;
             woodUI.text = woodCollected.ToString();
+            return true;
         }
+        return false;
     }
 
     public void ThrowWood() {
-        Debug.Log("Throw Wood");
         if (woodCollected == 0) {
             return;
         }
