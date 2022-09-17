@@ -5,8 +5,14 @@ public class Cauldron : MonoBehaviour {
     [SerializeField] int winningWoodAmount = 10;
     [SerializeField] int totalWoodInLevel = 20;
 
+    private bool atStageTwo = false;
     private int woodAtCauldron = 0;
     private int wastedWood = 0;
+    private Animator animator;
+
+    private void Start() {
+        animator = GetComponent<Animator>();
+    }
 
     private void Update() {
         if (woodAtCauldron >= winningWoodAmount) {
@@ -18,6 +24,9 @@ public class Cauldron : MonoBehaviour {
         if (other.gameObject.tag == "Player") {
             if (player.RemoveWoodCollected()) {
                 woodAtCauldron++;
+                if (!atStageTwo && woodAtCauldron > (winningWoodAmount/2)) {
+                    animator.SetTrigger("Stage 2");
+                }
             }
         }
     }

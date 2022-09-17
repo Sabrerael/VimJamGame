@@ -486,12 +486,12 @@ Camera:
     x: 0
     y: 0
     width: 1
-    height: 1
+    height: 0.99936545
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 11.875
+  orthographic size: 11.25
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -503,7 +503,7 @@ Camera:
   m_HDR: 1
   m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
+  m_ForceIntoRT: 1
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -4587,9 +4587,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: 'You are a witch who has lost her Magic. Get it back  by turning up the
-    heat in her cauldron!
+    heat in your cauldron!
 
-    - Collect Wood and Bring it back to your cauldro
+    - Collect Wood and Bring it back to your cauldron
 
     -
     Avoid the Ghost trying to steal your wood
@@ -4597,7 +4597,8 @@ MonoBehaviour:
     -Throw your Collected Wood to
     Stop the Ghost
 
-    - Don''t waste too much wood or the Potion won''t brew'
+    - Don''t waste too much wood or you won''t be able to brew
+    your potion'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ddb3991d744dbb442819722dee01f0e0, type: 2}
   m_sharedMaterial: {fileID: 7595859552449914912, guid: ddb3991d744dbb442819722dee01f0e0, type: 2}

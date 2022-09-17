@@ -31,6 +31,14 @@ public class LevelLoader : MonoBehaviour {
     public void LoadLevelOne() {
         SceneManager.LoadScene("Level 1");
     }
+
+    public void LoadLevelTwo() {
+        SceneManager.LoadScene("Level 2");
+    }
+
+    public void LoadLevelThree() {
+        SceneManager.LoadScene("Level 3");
+    }
     
     public void LoadWinScreen() {
         SceneManager.LoadScene("Win Screen");
