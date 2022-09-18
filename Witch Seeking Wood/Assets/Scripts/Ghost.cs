@@ -3,10 +3,13 @@ using UnityEngine;
 
 public class Ghost : MonoBehaviour {
     [SerializeField] GameObject player = null;
+    [SerializeField] Cauldron cauldron = null;
     [SerializeField] Transform[] teleportPoints = null;
     [SerializeField] float baseMovementSpeed = 1;
     [SerializeField] float movementSpeedIncrease = 0.25f;
     [SerializeField] float increaseStep = 10;
+    [SerializeField] AudioClip touchPlayerAudioClip = null;
+    [SerializeField] AudioClip teleportAudioClip = null;
 
     private bool stunned = false;
     private bool teleporting = false;
@@ -40,12 +43,17 @@ public class Ghost : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        // Fade to invisible, Teleport away from player, fade back in, start moving.
-        if (other.gameObject.tag == "Player") {
+        if (other.gameObject.tag == "Player" && !stunned && !teleporting) {
+            AudioSource.PlayClipAtPoint(touchPlayerAudioClip, transform.position);
             Player player = other.gameObject.GetComponent<Player>();
             movementSpeed = 0;
-            player.RemoveWoodCollected();
-            player.RemoveWoodCollected();
+            // Ghost Removes Two Wood if it touchs the Player
+            if (player.RemoveWoodCollected()) {
+                cauldron.AddToWastedWood();
+            }
+            if (player.RemoveWoodCollected()) {
+                cauldron.AddToWastedWood();
+            }
             animator.SetTrigger("Teleport");
         }
     }
@@ -54,6 +62,7 @@ public class Ghost : MonoBehaviour {
         stunned = true;
         animator.SetBool("Stunned", true);
         myRigidbody2D.velocity = new Vector3(0,0,0);
+        myRigidbody2D.isKinematic = true;
         StartCoroutine(StunTimer(stunTime));
         timer = 0;
         movementSpeed = baseMovementSpeed;
@@ -65,6 +74,7 @@ public class Ghost : MonoBehaviour {
     }
 
     private void TeleportAway() {
+        AudioSource.PlayClipAtPoint(teleportAudioClip, transform.position);
         int randomIndex = Random.Range(0,teleportPoints.Length);
         transform.position = teleportPoints[randomIndex].position;
     }
@@ -73,5 +83,6 @@ public class Ghost : MonoBehaviour {
         yield return new WaitForSeconds(stunTime);
         stunned = false;
         animator.SetBool("Stunned", false);
+        myRigidbody2D.isKinematic = false;
     }
 }

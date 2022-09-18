@@ -135,3 +135,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stunTime: 15
+  audioClip: {fileID: 8300000, guid: ded93c09441cb654ea5afd1647656836, type: 3}
+  brokenWood: {fileID: 5435711064207988626, guid: 20a65288c288a4844bcb9bb5b3ff4dd0, type: 3}

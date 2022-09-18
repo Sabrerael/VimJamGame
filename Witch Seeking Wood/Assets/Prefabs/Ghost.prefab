@@ -146,10 +146,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  cauldron: {fileID: 0}
   teleportPoints: []
   baseMovementSpeed: 4
   movementSpeedIncrease: 1
   increaseStep: 6
+  touchPlayerAudioClip: {fileID: 8300000, guid: abecc54bb0607864b9035692896c4b29, type: 3}
+  teleportAudioClip: {fileID: 8300000, guid: e00c38e64d8ff3343a05fd7252ee3f9e, type: 3}
 --- !u!95 &4040601185500105191
 Animator:
   serializedVersion: 3

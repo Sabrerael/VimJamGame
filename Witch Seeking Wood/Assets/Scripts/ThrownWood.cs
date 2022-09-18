@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class ThrownWood : MonoBehaviour {
     [SerializeField] float stunTime = 15;
+    [SerializeField] AudioClip audioClip = null;
+    [SerializeField] GameObject brokenWood = null;
 
     private Cauldron cauldron;
 
@@ -16,7 +18,9 @@ public class ThrownWood : MonoBehaviour {
             other.GetComponent<Ghost>().StunGhost(stunTime);
         }
 
-        GameObject.Destroy(this.gameObject);
+        AudioSource.PlayClipAtPoint(audioClip, transform.position);
         cauldron.AddToWastedWood();
+        Instantiate(brokenWood, transform.position, Quaternion.identity);
+        GameObject.Destroy(this.gameObject);
     }
 }

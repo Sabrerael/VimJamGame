@@ -206,7 +206,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   woodUI: {fileID: 0}
   thrownWoodPrefab: {fileID: 7804908043648400505, guid: 3472af2749fbe1742a43114869598e66, type: 3}
-  throwingSpeed: 12
+  throwingSpeed: 15
+  audioClip: {fileID: 8300000, guid: 2efcd0b4e633c2f4791aeefd56c09c71, type: 3}
 --- !u!95 &3446832511735970457
 Animator:
   serializedVersion: 3

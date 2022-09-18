@@ -6,12 +6,14 @@ public class Player : MonoBehaviour {
     [SerializeField] TextMeshProUGUI woodUI = null;
     [SerializeField] GameObject thrownWoodPrefab = null;
     [SerializeField] float throwingSpeed = 5;
+    [SerializeField] AudioClip audioClip = null;
 
     private int woodCollected = 0;
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.GetComponent<Wood>()) {
             AddWoodCollected(other.GetComponent<Wood>().GetWoodValue());
+            AudioSource.PlayClipAtPoint(audioClip, transform.position);
             Destroy(other.gameObject);
         }
     }
