@@ -186,6 +186,14 @@ MonoBehaviour:
   player: {fileID: 0}
   winningWoodAmount: 10
   totalWoodInLevel: 20
+  woodIntoFireTime: 0.2
+  levelString: Level1
+  winProgressBar: {fileID: 0}
+  winTextUI: {fileID: 0}
+  loseProgressBar: {fileID: 0}
+  loseTextUI: {fileID: 0}
+  stopWatch: {fileID: 0}
+  fireAudioClip: {fileID: 8300000, guid: 4991047f6049b1f43ab3e6660125fda6, type: 3}
 --- !u!95 &7475885904558571347
 Animator:
   serializedVersion: 3

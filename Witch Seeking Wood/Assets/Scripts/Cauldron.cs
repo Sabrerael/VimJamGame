@@ -5,17 +5,20 @@ public class Cauldron : MonoBehaviour {
     [SerializeField] Player player;
     [SerializeField] int winningWoodAmount = 10;
     [SerializeField] int totalWoodInLevel = 20;
+    [SerializeField] float woodIntoFireTime = 0.2f;
     [SerializeField] string levelString = "Level1";
     [SerializeField] RectTransform winProgressBar = null;
     [SerializeField] TextMeshProUGUI winTextUI = null;
     [SerializeField] RectTransform loseProgressBar = null;
     [SerializeField] TextMeshProUGUI loseTextUI = null;
     [SerializeField] StopWatch stopWatch = null;
+    [SerializeField] AudioClip fireAudioClip = null;
 
     private bool atStageTwo = false;
     private int woodAtCauldron = 0;
     private int wastedWood = 0;
     private int wastedWoodToLose = 0;
+    private float timer = 0;
     private Animator animator;
 
     private void Start() {
@@ -36,14 +39,22 @@ public class Cauldron : MonoBehaviour {
 
     private void OnTriggerStay2D(Collider2D other) {
         if (other.gameObject.tag == "Player") {
-            if (player.RemoveWoodCollected()) {
+            if (timer > woodIntoFireTime && player.RemoveWoodCollected()) {
                 woodAtCauldron++;
                 winTextUI.text = woodAtCauldron.ToString();
-                if (!atStageTwo && woodAtCauldron > (winningWoodAmount/2)) {
+                if (!atStageTwo && woodAtCauldron > (winningWoodAmount / 2)) {
                     animator.SetTrigger("Stage 2");
                 }
+                AudioSource.PlayClipAtPoint(fireAudioClip, transform.position);
+                timer = 0;
+            } else {
+                timer += Time.deltaTime;
             }
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        timer = 0;
     }
 
     public void AddToWastedWood() {
